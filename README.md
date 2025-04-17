@@ -66,7 +66,6 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 ## 👨‍💻 Auteur
 
 **Mehdi Kooli**
-- GitHub: [@votre-username](https://github.com/votre-username)
 
 ---
 
