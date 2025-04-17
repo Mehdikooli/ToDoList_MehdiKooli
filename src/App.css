@@ -1,0 +1,480 @@
+/* Variables globales */
+:root {
+  --primary-color: #6c5ce7;
+  --secondary-color: #a29bfe;
+  --background-color: #f5f6fa;
+  --text-color: #2d3436;
+  --success-color: #00b894;
+  --danger-color: #d63031;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --input-bg: #ffffff;
+  --input-text: #2d3436;
+}
+
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animation du fond */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #6c5ce7, #a29bfe, #8c7ae6, #6c5ce7);
+  background-size: 400% 400%;
+  z-index: -2;
+  animation: gradientBG 15s ease infinite;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.1) 100%);
+  z-index: -1;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* Particules animées */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: float 15s infinite linear;
+}
+
+.particle:nth-child(1) {
+  width: 20px;
+  height: 20px;
+  left: 10%;
+  top: 20%;
+  animation-duration: 20s;
+}
+
+.particle:nth-child(2) {
+  width: 15px;
+  height: 15px;
+  left: 30%;
+  top: 50%;
+  animation-duration: 25s;
+}
+
+.particle:nth-child(3) {
+  width: 25px;
+  height: 25px;
+  left: 50%;
+  top: 30%;
+  animation-duration: 15s;
+}
+
+.particle:nth-child(4) {
+  width: 18px;
+  height: 18px;
+  left: 70%;
+  top: 40%;
+  animation-duration: 22s;
+}
+
+.particle:nth-child(5) {
+  width: 22px;
+  height: 22px;
+  left: 90%;
+  top: 60%;
+  animation-duration: 18s;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.5; }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Conteneur principal */
+#root {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Conteneur de configuration */
+.configuration-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.welcome-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.welcome-card h1 {
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.welcome-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.welcome-card input {
+  padding: 1rem;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 80%;
+  max-width: 300px;
+  background: var(--input-bg);
+  color: var(--input-text);
+}
+
+.welcome-card input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+}
+
+.welcome-card button {
+  padding: 1rem 2rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 80%;
+  max-width: 300px;
+}
+
+.welcome-card button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+/* Conteneur principal de l'application */
+.app-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.todo-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.todo-container h1 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.todo-container h2 {
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Formulaire d'ajout de tâche */
+.task-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.task-form input {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--input-bg);
+  color: var(--input-text);
+}
+
+.task-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+}
+
+.task-form button {
+  padding: 1rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-form button:hover {
+  background: var(--secondary-color);
+  transform: scale(1.1);
+}
+
+/* Liste des tâches */
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--input-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.task-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.task-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.task-item span {
+  flex: 1;
+  font-size: 1.1rem;
+  text-align: left;
+  color: var(--input-text);
+}
+
+.task-item.completed span {
+  text-decoration: line-through;
+  color: #95a5a6;
+}
+
+.delete-btn {
+  padding: 0.5rem 1rem;
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+  transform: scale(1.1);
+}
+
+/* 🔹 Style des logos React et Vite */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* 🔹 Animation de rotation du logo React */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 🔹 Active l'animation seulement si l'utilisateur ne réduit pas les animations */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* 🔹 Style de la carte */
+.card {
+  padding: 2em;
+}
+
+/* 🔹 Style du texte d'aide */
+.read-the-docs {
+  color: #888;
+}
+
+/* 🔹 Espacement entre le formulaire et la liste */
+form {
+  margin-bottom: 20px;
+}
+
+/* 🔹 Champ de texte pour ajouter une tâche */
+input[type="text"] {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: 250px;
+  font-size: 16px;
+}
+
+/* 🔹 Bouton pour ajouter une tâche */
+button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #4a54e1;
+}
+
+/* 🔹 Style de la liste des tâches */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* 🔹 Style des tâches (affichage en ligne) */
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* 🔹 Agrandit la case à cocher */
+li input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+/* 🔹 Style des tâches complétées (barré + opacité réduite) */
+.completed {
+  text-decoration: line-through;
+  color: gray;
+  opacity: 0.7;
+}
+
+/* 🔹 Bouton de suppression des tâches */
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
