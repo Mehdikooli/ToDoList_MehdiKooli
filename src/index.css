@@ -1,40 +1,68 @@
+/* Variables globales pour la cohérence */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Couleurs claires par défaut */
+  color: #213547;
+  background-color: #ffffff;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Reset de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Styles de base pour le body */
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #ffffff;
 }
 
+/* Styles pour les liens */
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+/* Styles pour les titres */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #213547;
 }
 
+h2 {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  line-height: 1.2;
+  font-weight: 500;
+  color: #213547;
+}
+
+h3 {
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  line-height: 1.3;
+  font-weight: 500;
+  color: #213547;
+}
+
+/* Styles pour les boutons */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -42,27 +70,210 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f9f9f9;
+  color: #213547;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+/* Styles pour les inputs */
+input {
+  font-family: inherit;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 2px solid #e1e5e9;
+  padding: 0.6em 1em;
+  transition: all 0.3s ease;
+  background-color: white;
+  color: #2d3436;
+}
+
+input:focus {
+  outline: none;
+  border-color: #6c5ce7;
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+}
+
+/* Styles pour les listes */
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Styles pour les paragraphes */
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #213547;
+}
+
+/* Conteneur principal */
+#root {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Media Queries pour la responsivité */
+
+/* Tablettes */
+@media (max-width: 768px) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
+  
+  button {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+  }
+  
+  input {
+    padding: 0.5em 0.8em;
+    font-size: 0.9em;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+  #root {
+    padding: 0.25rem;
+  }
+  
+  h1 {
+    font-size: clamp(1.3rem, 6vw, 2rem);
+  }
+  
+  h2 {
+    font-size: clamp(0.9rem, 5vw, 1.1rem);
+  }
+  
+  button {
+    padding: 0.4em 0.8em;
+    font-size: 0.85em;
+  }
+  
+  input {
+    padding: 0.4em 0.7em;
+    font-size: 0.85em;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 320px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+  
+  h2 {
+    font-size: 0.8rem;
+  }
+  
+  button {
+    padding: 0.3em 0.6em;
+    font-size: 0.8em;
+  }
+  
+  input {
+    padding: 0.3em 0.6em;
+    font-size: 0.8em;
+  }
+}
+
+/* Grands écrans */
+@media (min-width: 1200px) {
+  #root {
+    max-width: 1000px;
+  }
+  
+  h1 {
+    font-size: 3.2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  button {
+    padding: 0.8em 1.5em;
+    font-size: 1.1em;
+  }
+  
+  input {
+    padding: 0.8em 1.2em;
+    font-size: 1.1em;
+  }
+}
+
+/* Support pour les préférences de réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Amélioration de l'accessibilité */
+@media (prefers-contrast: high) {
   :root {
-    color: #213547;
+    color: #000000;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
+  
   button {
-    background-color: #f9f9f9;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+  }
+  
+  input {
+    border: 2px solid #000000;
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+
+/* Support pour les écrans haute densité */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  button, input {
+    border-width: 0.5px;
+  }
+}
+
+/* Orientation paysage sur mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+  
+  h2 {
+    margin-bottom: 0.5rem;
   }
 }

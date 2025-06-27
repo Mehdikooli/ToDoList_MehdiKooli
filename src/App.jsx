@@ -4,9 +4,22 @@ import viteLogo from '/vite.svg' // Import du logo Vite
 import './App.css' // Import des styles CSS
 
 export default function App() {
-  const [userName, setUserName] = useState("")
-  const [listName, setListName] = useState("")
-  const [isConfigured, setIsConfigured] = useState(false)
+  // 🔹 Initialisation de l'état avec localStorage pour la configuration
+  const [userName, setUserName] = useState(() => {
+    const saved = localStorage.getItem("userName")
+    return saved || ""
+  })
+  
+  const [listName, setListName] = useState(() => {
+    const saved = localStorage.getItem("listName")
+    return saved || ""
+  })
+  
+  const [isConfigured, setIsConfigured] = useState(() => {
+    const saved = localStorage.getItem("isConfigured")
+    return saved === "true"
+  })
+
   // 🔹 Initialisation de l'état des tâches avec localStorage
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks") // Récupère les tâches sauvegardées
@@ -14,6 +27,13 @@ export default function App() {
   })
 
   const [newTask, setNewTask] = useState("") // 🔹 État pour la nouvelle tâche
+
+  // 🔹 useEffect pour sauvegarder la configuration dans localStorage
+  useEffect(() => {
+    localStorage.setItem("userName", userName)
+    localStorage.setItem("listName", listName)
+    localStorage.setItem("isConfigured", isConfigured.toString())
+  }, [userName, listName, isConfigured])
 
   // 🔹 useEffect pour sauvegarder les tâches dans localStorage à chaque modification
   useEffect(() => {
@@ -54,6 +74,18 @@ export default function App() {
     setTasks(tasks.filter(task => task.id !== id)) // Filtre la liste pour retirer la tâche sélectionnée
   }
 
+  // 🔹 Fonction pour réinitialiser l'application
+  const resetApp = () => {
+    setIsConfigured(false)
+    setUserName("")
+    setListName("")
+    setTasks([])
+    localStorage.removeItem("userName")
+    localStorage.removeItem("listName")
+    localStorage.removeItem("isConfigured")
+    localStorage.removeItem("tasks")
+  }
+
   return (
     <>
       <div className="particles">
@@ -88,8 +120,11 @@ export default function App() {
       ) : (
         <div className="app-container">
           <div className="todo-container">
-            <h1>Bienvenue {userName} !</h1>
-            <h2>{listName}</h2>
+            <div className="header">
+              <h1>Bienvenue {userName} !</h1>
+              <h2>{listName} :</h2>
+              <button className="reset-btn" onClick={resetApp}>🔄 Réinitialiser</button>
+            </div>
             
             <form onSubmit={addTask} className="task-form">
               <input 
@@ -102,17 +137,24 @@ export default function App() {
             </form>
 
             <div className="tasks-list">
-              {tasks.map(task => (
-                <div key={task.id} className={`task-item ${task.completed ? 'completed' : ''}`}>
-                  <input 
-                    type="checkbox" 
-                    checked={task.completed} 
-                    onChange={() => toggleTask(task.id)} 
-                  />
-                  <span>{task.text}</span>
-                  <button className="delete-btn" onClick={() => deleteTask(task.id)}>×</button>
+              {tasks.length === 0 ? (
+                <div className="empty-state">
+                  <p>🎯 Aucune tâche pour le moment</p>
+                  <p>Ajoutez votre première tâche ci-dessus !</p>
                 </div>
-              ))}
+              ) : (
+                tasks.map(task => (
+                  <div key={task.id} className={`task-item ${task.completed ? 'completed' : ''}`}>
+                    <input 
+                      type="checkbox" 
+                      checked={task.completed} 
+                      onChange={() => toggleTask(task.id)} 
+                    />
+                    <span>{task.text}</span>
+                    <button className="delete-btn" onClick={() => deleteTask(task.id)}>×</button>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
